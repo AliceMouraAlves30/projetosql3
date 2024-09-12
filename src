@@ -16,5 +16,39 @@ CREATE TABLE produtos (
     quantidade_estoque INT NOT NULL
 );
 
+CREATE TABLE vendas (
+    id_venda INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    id_produto INT NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
+
+INSERT INTO clientes (nome, email, telefone) VALUES
+('Alice Moura','alice.moura@gmail','4888311468'),
+('Betina Santos','betina.santos@gmail','4878903456'),
+('Felipe Neto','felipe.neto@gmail','4891775898');
+
+INSERT INTO produtos (nome, preco, quantidade_estoque) VALUES
+('Produto A','10.55,100),
+('Produto B','8.50,95),
+('Produto C','6.45,90);
+
+INSERT INTO vendas (id_cliente, id_produto,quantidade, data_venda) VALUES
+(1,1,3,'2024-01-22'),
+(3,3,2,'2024-01-30'),
+(2,2,1,'2024-02-15');
+
+SELECT v.id_venda, c.nome AS nome_cliente, p.nome AS nome_produto, v.quantidade, v.data_venda
+FROM vendas v
+JOIN clientes c ON v.id_cliente = c.id_cliente
+JOIN produtos p ON v.id_produto = p.id_produto;
+
+
+
+
+
+
 
     
