@@ -1,0 +1,16 @@
+
+### .gitignore
+
+```gitignore
+# Ignorar arquivos relacionados ao banco de dados
+*.sql
+*.db
+*.sqlite
+
+# Ignorar configurações do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos temporários de backup
+*~
+*.bak
