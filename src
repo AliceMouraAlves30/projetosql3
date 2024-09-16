@@ -21,6 +21,7 @@ CREATE TABLE vendas (
     id_cliente INT NOT NULL,
     id_produto INT NOT NULL,
     quantidade INT NOT NULL,
+    data_venda VARCHAR(100),
     FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
     FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
 );
@@ -31,14 +32,16 @@ INSERT INTO clientes (nome, email, telefone) VALUES
 ('Felipe Neto','felipe.neto@gmail','4891775898');
 
 INSERT INTO produtos (nome, preco, quantidade_estoque) VALUES
-('Produto A','10.55,100),
-('Produto B','8.50,95),
-('Produto C','6.45,90);
+('Produto A', 10.55, 100),
+('Produto B', 8.50, 95),
+('Produto C', 6.45, 90);
 
-INSERT INTO vendas (id_cliente, id_produto,quantidade, data_venda) VALUES
-(1,1,3,'2024-01-22'),
-(3,3,2,'2024-01-30'),
-(2,2,1,'2024-02-15');
+
+INSERT INTO vendas (id_cliente, id_produto, quantidade, data_venda) VALUES
+(1, 1, 3, '2024-01-22'),
+(3, 3, 2, '2024-01-30'),
+(2, 2, 1, '2024-02-15');
+
 
 SELECT v.id_venda, c.nome AS nome_cliente, p.nome AS nome_produto, v.quantidade, v.data_venda
 FROM vendas v
@@ -60,8 +63,10 @@ SET quantidade_estoque = quantidade_estoque - 2
 WHERE id_produto = 1;
 
 UPDATE clientes
-SET telefone = '4898706534'
-WHERE id_produto = 1;
+JOIN vendas ON clientes.id_cliente = vendas.id_cliente
+SET clientes.telefone = '4898706534'
+WHERE vendas.id_produto = 1;
+
 
 DELETE FROM vendas WHERE id_venda = 1;
 
